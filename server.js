@@ -42,7 +42,7 @@ var ReplyComment = mongoose.model("ReplyComment", replyComment);
 
 
 app.post("/postComment", (req, res) => {
-    console.log(req.body);
+    
     var myData = new PostComment(req.body);
     myData.save()
         .then(item => {
@@ -65,29 +65,31 @@ app.post("/replyComment", (req, res) => {
         });
 });
 
-app.get("/getAllComments", (req, res1) => {
-    // console.log(req.body);
+app.get("/getAllComments", (req, response) => {
+   
     mongoose.connection.collection('postcomments').aggregate([
         {
             $lookup:
-            {
+            { 
+                
                 from: 'replycomments',
                 localField: 'id',
                 foreignField: 'commentId',
-                as: 'postedCommentsDetails'
+                as: 'replyCommentsDetails'
             }
         },
-        {
-            $unwind: "$postedCommentsDetails"
-        }
+        { $project: { "_id": 0, "__v": 0, "replyCommentsDetails": { "_id": 0,"__v": 0 } } }
+         
   
     ]).toArray(function (err, res) {
         if (err) throw err;
-        res1.end(JSON.stringify(res));
-        console.log(res1);
+          
+           response.end(JSON.stringify(res));
+     
     });
-    //console.log(res1);
+   
 });
+
 
 app.listen(port, () => {
     console.log("Server listening on port " + port);
