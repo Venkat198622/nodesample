@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"node-demo.replycomments"}],"uuid":"c75c2ab07d2f4ae3b99e6c94a89b5e22"}
