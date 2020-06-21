@@ -2,11 +2,12 @@
   "name": "wxtest",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha",
     "test-watch": "mocha --watch",
-    "start": "node app.js"
+    "start": "node server.js",
+    "dev": "nodemon --watch server.js"
   },
   "repository": {
     "type": "git",
